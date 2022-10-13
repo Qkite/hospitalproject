@@ -11,21 +11,28 @@ public class Hospital {
     private int emergencyRoom;
 
 
-    public Hospital(String id, String address){
-        this.id = id.replaceAll("\"", "");
-        this.address = address.replaceAll("\"", "");
+    public Hospital(String id, String address, String category,String name, int emergencyRoom){
+        this.id = id;
+        this.address = address;
+        this.name = name;
+        this.emergencyRoom = emergencyRoom;
+        this.category = category;
+
+
     }
 
 
     public String getId() {
         return id;
-    } // getter를 이용해서 접근함
+    }
+    // can access to variable with getter
 
     public String getAddress() {
         return address;
     }
     public String getDistrict() {
-        return district;
+        String[] splitted = this.address.split(" ");
+        return String.format("%s %s", splitted[0], splitted[1]);
     }
 
     public String getCategory() {

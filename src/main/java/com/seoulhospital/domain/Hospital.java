@@ -9,10 +9,8 @@ public class Hospital {
     private String name;
     private String subdivision;
     private int emergencyRoom;
-
-
-
     private String addtionalInfo;
+
 
 
     public Hospital(String id, String address, String category,String name, int emergencyRoom, String additionalInfo){
@@ -67,6 +65,22 @@ public class Hospital {
 
     public String getAddtionalInfo() {
         return addtionalInfo;
+    }
+
+
+    public String toSQLQuery(){
+
+        this.address = this.address.replace("'", "");
+        String query = "INSERT INTO `seoul_hospital_info`.`seoul_hospital` (`id`,`address`,`district`,`category`,`emergency_room`,`name`,`subdivision`) " +
+                "VALUES ('" + this.id + "','" + this.address + "','" + this.district + "','" + this.category + "'," +
+                this.emergencyRoom + ",'" + this.name + "',";
+        if(this.subdivision != null) {
+            query += "'" + this.subdivision + "');";
+        } else {
+            query += "null);";
+        }
+
+        return query;
     }
 
 }

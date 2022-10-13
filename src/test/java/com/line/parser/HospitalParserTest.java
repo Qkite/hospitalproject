@@ -1,10 +1,13 @@
 package com.line.parser;
 
+import com.seoulhospital.fileout.FileMake;
 import org.testng.annotations.Test;
 import com.seoulhospital.domain.Hospital;
 import com.seoulhospital.parser.HospitalParser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+
+import java.io.IOException;
 
 public class HospitalParserTest {
 
@@ -12,13 +15,23 @@ public class HospitalParserTest {
 
     @Test
     @DisplayName("ID가 파싱이 잘 되는지")
-    void hospitalParsing(){
+    void hospitalParsing() throws IOException {
+
         HospitalParser hospitalParser = new HospitalParser();
         Hospital hospital = hospitalParser.parse(this.line1);
         String address =  "서울특별시 금천구 벚꽃로 286 삼성리더스타워 111~114호 (가산동)";
 
         Assertions.assertEquals("A1120837", hospital.getId());
         Assertions.assertEquals(address, hospital.getAddress());
+
+        // 파일 작성
+
+        FileMake fileMake = new FileMake("C:\\Users\\yeonji\\Desktop\\백엔드강의\\4주차\\datainput.sql");
+
+        String query = hospital.toSQLQuery();
+
+        fileMake.createFile();
+        fileMake.writeFile(query);
 
     }
 

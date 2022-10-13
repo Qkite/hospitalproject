@@ -34,5 +34,4 @@ public class HospitalParserTest {
         fileMake.writeFile(query);
 
     }
-
 }

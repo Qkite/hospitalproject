@@ -71,11 +71,10 @@ public class Hospital {
     public String toSQLQuery(){
 
         this.address = this.address.replace("'", "");
-        String query = "INSERT INTO `seoul_hospital_info`.`seoul_hospital` (`id`,`address`,`district`,`category`,`emergency_room`,`name`,`subdivision`) " +
-                "VALUES ('" + this.id + "','" + this.address + "','" + this.district + "','" + this.category + "'," +
-                this.emergencyRoom + ",'" + this.name + "',";
+        String query = String.format("INSERT INTO `seoul_hospital_info`.`seoul_hospital` (`id`,`address`,`district`,`category`,`emergency_room`,`name`,`subdivision`)\n"
+                + "VALUES (\"%s\",\"%s\",\"%s\",\"%s\", %s,\"%s\",", this.id, this.address, this.district, this.category, this.emergencyRoom, this.name);
         if(this.subdivision != null) {
-            query += "'" + this.subdivision + "');";
+            query += String.format("\"%s\");", this.subdivision);
         } else {
             query += "null);";
         }

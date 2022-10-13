@@ -16,14 +16,20 @@ public class FileMake {
         }
     }
 
-    public void writeFile(String inputString) throws IOException {
+    public void writeFile(String inputString, boolean closeFile) throws IOException {
         File file = new File(filePath);
         BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
-        writer.write(inputString);
-        writer.close();
+
+        if (closeFile){
+            writer.close();
+        } else{
+            writer.write(inputString);
+            writer.newLine();
+        }
 
 
     }
+
 
 
 }

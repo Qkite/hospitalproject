@@ -31,7 +31,7 @@ public class HospitalParserTest {
         String query = hospital.toSQLQuery();
 
         fileMake.createFile();
-        fileMake.writeFile(query);
+        fileMake.writeFile(query, false);
 
     }
 }

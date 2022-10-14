@@ -13,7 +13,9 @@ public class Hospital {
 
 
 
-    public Hospital(String id, String address, String category,String name, int emergencyRoom, String additionalInfo){
+    public Hospital(String id, String address, String category,String name, int emergencyRoom,
+                    String additionalInfo){
+        // district은 address, subdivision은 name과 additionalInfo를 가공하여 나오므로 input으로 받지 않음
         this.id = id;
         this.address = address;
         this.name = name;

@@ -6,6 +6,7 @@ import com.seoulhospital.fileout.FileMake;
 import com.seoulhospital.parser.HospitalParser;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -20,8 +21,8 @@ public class Main {
 
         // 파일 작성
 
-        FileMake fileMake = new FileMake("C:\\Users\\yeonji\\Desktop\\백엔드강의\\4주차\\datainput1.sql");
-        String filePath = "C:\\Users\\yeonji\\Desktop\\백엔드강의\\4주차\\서울시 병의원 위치 정보.csv";
+        FileMake fileMake = new FileMake("C:\\Users\\yeonji\\Desktop\\datainput1.sql");
+        String filePath = "C:\\Users\\yeonji\\Desktop\\seoulhospitals.csv";
 
         FileController<Hospital> hospitalFileController = new FileController<>(new HospitalParser());
         List<Hospital> hospitalList = hospitalFileController.readLines(filePath);
@@ -29,15 +30,15 @@ public class Main {
 
         fileMake.createFile();
 
-        for (Hospital hospital: hospitalList){
+        List<String> lines = new ArrayList<>();
+        for (Hospital hospital : hospitalList) {
             HospitalParser hospitalParser = new HospitalParser();
             //Hospital hospital = hospitalParser.parse(line1);
             String query = hospital.toSQLQuery();
-            fileMake.writeFile(query, false);
+            lines.add(query);
         }
 
-        fileMake.writeFile("", true);
-
+        fileMake.writeLines(lines, "C:\\Users\\yeonji\\Desktop\\datainput1.sql");
 
         }
 

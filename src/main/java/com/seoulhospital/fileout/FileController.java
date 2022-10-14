@@ -2,11 +2,10 @@ package com.seoulhospital.fileout;
 
 import com.seoulhospital.parser.Parser;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +26,14 @@ public class FileController<T> {
 
     public List<T> readLines(String filename) throws IOException {
         List<T> result = new ArrayList<>();
-        BufferedReader br = new BufferedReader(new FileReader(filename));
-        //br = Files.newBufferedReader(Paths.get(filename), StandardCharsets.UTF_8);
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename),"utf-8"));
+        //br = Files.newBufferedReader(new InputStreamReader(new FileInputStream(filename),"utf-8"));
         String str;
+
         if (isRemoveColumnName) {
             br.readLine();
         }
+
         while ((str = br.readLine()) != null) {
             result.add(parser.parse(str));
         }

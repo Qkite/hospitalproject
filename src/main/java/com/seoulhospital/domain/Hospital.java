@@ -69,19 +69,24 @@ public class Hospital {
         return addtionalInfo;
     }
 
-
-    public String toSQLQuery(){
-
-        this.address = this.address.replace("'", "");
-        String query = String.format("INSERT INTO `seoul_hospital_info`.`seoul_hospital` (`id`,`address`,`district`,`category`,`emergency_room`,`name`,`subdivision`)\n"
-                + "VALUES (\"%s\",\"%s\",\"%s\",\"%s\", %s,\"%s\",", this.id, this.address, this.district, this.category, this.emergencyRoom, this.name);
-        if(this.subdivision != null) {
-            query += String.format("\"%s\");", this.subdivision);
-        } else {
-            query += "null);";
-        }
-
-        return query;
+    public String[] returnInfo(){
+        return new String[]{this.id, this.category,  Integer.toString(this.emergencyRoom), this.name};
     }
+
+
+//    public String toSQLQuery(){
+//
+//        this.address = this.address.replace("'", "");
+//        String query = String.format("INSERT INTO `seoul_hospital_info`.`seoul_hospital` (`id`,`address`,`district`,`category`,`emergency_room`,`name`,`subdivision`)\n"
+//                + "VALUES (\"%s\",\"%s\",\"%s\",\"%s\", %s,\"%s\",", this.id, this.address, this.district, this.category, this.emergencyRoom, this.name);
+//        if(this.subdivision != null) {
+//            query += String.format("\"%s\");\n", this.subdivision);
+//        } else {
+//            query += "null);\n";
+//        }
+//
+//        return query;
+//    }
+
 
 }
